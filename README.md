@@ -169,4 +169,4 @@ databricks bundle run -t dev kafka_databricks_job
 
     - Validate the asset bundle.
 
-    - Deploy to the staging environment.
+    - Deploy to the staging environment. For simplicity, the same workspace is used, and the deployed files can be found under the Databricks Shared folder after deployment.
