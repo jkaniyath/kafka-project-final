@@ -109,7 +109,7 @@ Create five containers in Azure Storage for different purposes:
 
 - Checkpoints: Stores checkpoint information for the streaming application.
 
-- Landing Zone: Stores static table data (e.g., country details).
+- Landing Zone: Stores static table data (e.g., country details, Use the countries_lookup.csv available in data folder).
 
 - Logging: Stores application logs.
 
