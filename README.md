@@ -162,7 +162,7 @@ After successfully running unit tests:
 
 - Execute Databricks jobs in the development environment using Databricks Asset Bundles. [See the documentation](https://docs.databricks.com/aws/en/dev-tools/bundles)
 
-- Run Databricks Asset Bundles in CI/CD:
+- Run Databricks Asset Bundles in CI/CD:<br />
     This project follows the process below:
 
     - Execute unit tests.
