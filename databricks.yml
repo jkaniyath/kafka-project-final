@@ -1,26 +1,27 @@
 bundle:
-  name: kafka_databricks_bundle
+  name: kafka_databricks_bundle # Name of the Databricks asset bundle
 
 include:
-  - resources/*.yml
+  - resources/*.yml # Include all YAML resource files from the 'resources' directory
 
 variables:
   env:
-    default: "dev"
+    default: "dev" # Default environment is set to "dev"
 
 
 targets:
   dev:
-    mode: development
+    mode: development # Development mode configuration
     default: true
     workspace:
-      host: https://adb-3663733547315682.2.azuredatabricks.net
+    # Change the workspace url accordingly
+      host: https://adb-3663733547315682.2.azuredatabricks.net # Databricks workspace URL for dev
 
   staging:
-    mode: production
+    mode: production # Production mode configuration for staging
     workspace:
-      host: https://adb-3663733547315682.2.azuredatabricks.net
-      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}
+      host: https://adb-3663733547315682.2.azuredatabricks.net # Databricks workspace URL for staging
+      root_path: /Shared/.bundle/${bundle.target}/${bundle.name}  # Deployment path in workspace
     run_as:
       user_name: ${workspace.current_user.userName}
     

@@ -1,19 +1,19 @@
 resources:
   jobs:
     kafka_databricks_job:
-      name: kafka_databricks_job
+      name: kafka_databricks_job # Name of the Databricks job
       tasks:
         - task_key: project_setup 
           job_cluster_key: job_cluster
           notebook_task:
-            notebook_path: ../src/notebooks/project_setup.py
+            notebook_path: ../src/notebooks/project_setup.py # Path to the project setup notebook
             base_parameters:
-              env: ${var.env}
+              env: ${var.env}  # Environment variable for dynamic execution
           libraries:
-            - whl: ../dist/*.whl
+            - whl: ../dist/*.whl # Include necessary python wheel package
             - maven:
-                coordinates:  org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1
-
+                coordinates:  org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1 # Kafka dependency for Spark
+        # Bronze Layer - Data Ingestion
         - task_key: bronze_books_ingestion
           depends_on:
             - task_key: project_setup
@@ -49,7 +49,7 @@ resources:
             notebook_path: ../src/notebooks/bronze/ingest_to_bronze_orders.py
             base_parameters:
               env: ${var.env}
-
+        # Silver Layer - Data Processing
         - task_key: silver_books_ingestion
           depends_on:
             - task_key: project_setup
@@ -62,7 +62,7 @@ resources:
         - task_key: silver_customers_ingestion
           depends_on:
             - task_key: project_setup
-            - task_key: bronze_countries_ingestion
+            - task_key: bronze_countries_ingestion # Ensure countries are available before processing customer orders
           job_cluster_key: job_cluster
           notebook_task:
             notebook_path: ../src/notebooks/silver/ingest_to_silver_customers.py
@@ -96,7 +96,7 @@ resources:
             notebook_path: ../src/notebooks/silver/ingest_to_silver_customers_orders.py
             base_parameters:
               env: ${var.env}
-
+         # Gold Layer - Aggregated Analytics
         - task_key: gold_authors_stats_ingestion
           depends_on:
             - task_key: project_setup
@@ -105,7 +105,7 @@ resources:
             notebook_path: ../src/notebooks/gold/ingest_to_gold_authors_stats.py
             base_parameters:
               env: ${var.env}
-
+      # Cluster Configuration for Job Execution
       job_clusters:
         - job_cluster_key: job_cluster
           new_cluster:
