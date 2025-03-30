@@ -136,7 +136,7 @@ Create five containers in Azure Storage for different purposes:
 
 - Create catalog in Databricks:
 
-Example: dev for development, prod for production.
+    Example: dev for development, prod for production.
 
 #### 4. Clone the GitHub Repository
 Clone the project repository:
@@ -160,9 +160,10 @@ Refer to the [testing documentation](https://docs.databricks.com/aws/en/notebook
 
 After successfully running unit tests:
 
-- Execute Databricks jobs in the development environment using Databricks Asset Bundles. See the documentation.
+- Execute Databricks jobs in the development environment using Databricks Asset Bundles. [See the documentation](https://docs.databricks.com/aws/en/dev-tools/bundles)
 
 - Run Databricks Asset Bundles in CI/CD:
+    This project follows the process below:
 
     - Execute unit tests.
 
