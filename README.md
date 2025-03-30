@@ -50,7 +50,7 @@ Clone the project and install the required dependencies using setup.py (all nece
 ```
 git clone https://github.com/jkaniyath/kafka_producer.git
 cd kafka_producer
-python setup.py install
+pip install -e .
 ```
 ### Usage
 Run the script with the required arguments:
@@ -83,3 +83,89 @@ python main.py --help
 ```
 
 ## 2. Databricks Stream
+
+### Overview
+This Spark Streaming application consumes messages from Confluent Cloud Kafka topics (books, consumers, and orders), stores them in the bronze layer, processes them in the silver layer, and aggregates them in the gold layer.
+
+The schemas for these layers are structured within Unity Catalog and stored in an external location on Azure Storage Gen2. All Confluent Cloud secrets are managed using Databricks secrets. The complete source code and details are available in the [GitHub repository](https://github.com/jkaniyath/kafka-project-final)
+
+### Prerequisites
+
+- Ensure the following prerequisites are met before setting up the application:
+
+- A Databricks workspace enabled for Unity Catalog
+
+- Databricks CLI installed
+
+- GitHub account
+
+- VS Code
+
+- Python 3.11 (preferable)
+
+### Setup Steps
+
+#### 1. Create an Azure Storage Account
+
+Set up an Azure Storage Account to store external data locations and managed tables.
+
+#### 2. Create Storage Containers
+Create five containers in Azure Storage for different purposes:
+
+- Metastore Details: Stores metadata for Unity Catalog.
+
+- Schema Storage: Create directories named bronze, silver, and gold for storing schemas and managed table data.
+
+- Checkpoints: Stores checkpoint information for the streaming application.
+
+- Landing Zone: Stores static table data (e.g., country details).
+
+- Logging: Stores application logs.
+
+#### 3. Set Up Databricks and Unity Catalog
+
+- Create a Premium Databricks account.
+
+- Create an Access Connector for Azure Databricks to access Azure Storage. [Refer to the official documentation](https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/azure-managed-identities)
+
+- Enable Unity Catalog in Databricks. [Follow the setup guide](https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/enable-workspaces)
+
+- Define following external locations in Databricks:
+
+bronze, silver, gold, checkpoints, landing, logger.
+
+- Create catalog in Databricks:
+
+Example: dev for development, prod for production.
+
+#### 4. Clone the GitHub Repository
+Clone the project repository:
+```
+git clone https://github.com/jkaniyath/kafka-project-final.git
+```
+#### 5. Install Dependencies
+Navigate to the project directory and install dependencies:
+```
+pip install -e .
+```
+
+#### 6. Development Environment Setup
+This project is developed using VS Code with the Databricks extension. Refer to the [VS Code Databricks extension guide](https://docs.databricks.com/aws/en/dev-tools/vscode-ext/)
+
+#### 7. Run Unit Tests
+This project uses pytest for unit testing. Run unit tests using VS Code's Databricks extension or from the command line.
+Refer to the [testing documentation](https://docs.databricks.com/aws/en/notebooks/testing)
+
+#### 8. Running Databricks Jobs
+
+After successfully running unit tests:
+
+- Execute Databricks jobs in the development environment using Databricks Asset Bundles. See the documentation.
+
+- Run Databricks Asset Bundles in CI/CD:
+
+    - Execute unit tests.
+
+    - Validate the asset bundle.
+
+    - Deploy to the staging environment.

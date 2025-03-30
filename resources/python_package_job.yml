@@ -111,7 +111,7 @@ resources:
           new_cluster:
             spark_version: 15.4.x-scala2.12
             data_security_mode: SINGLE_USER
-            node_type_id: Standard_F4 #Standard_DS3_v2
+            node_type_id: Standard_F4 
             spark_conf: 
               "spark.databricks.catalog.enabled": "true"
             autoscale:
