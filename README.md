@@ -132,7 +132,7 @@ Create five containers in Azure Storage for different purposes:
 
 - Define following external locations in Databricks:
 
-bronze, silver, gold, checkpoints, landing, logger.
+    bronze, silver, gold, checkpoints, landing, logger.
 
 - Create catalog in Databricks:
 
