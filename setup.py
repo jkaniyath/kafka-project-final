@@ -17,6 +17,7 @@ setup(
         "setuptools",  
         "databricks-connect==15.1.*" ,
         "chispa==0.10.1",
-        "pytest"
+        "pytest",
+        "wheel"
     ],
 )

@@ -15,12 +15,12 @@ targets:
     default: true
     workspace:
     # Change the workspace url accordingly
-      host: https://adb-3663733547315682.2.azuredatabricks.net # Databricks workspace URL for dev
+      host: https://adb-3068645081333033.13.azuredatabricks.net # Databricks workspace URL for dev
 
   staging:
     mode: production # Production mode configuration for staging
     workspace:
-      host: https://adb-3663733547315682.2.azuredatabricks.net # Databricks workspace URL for staging
+      host: https://adb-3068645081333033.13.azuredatabricks.net # Databricks workspace URL for staging
       root_path: /Shared/.bundle/${bundle.target}/${bundle.name}  # Deployment path in workspace
     run_as:
       user_name: ${workspace.current_user.userName}

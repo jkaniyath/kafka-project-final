@@ -144,13 +144,23 @@ pip install -e .
 This project is developed using VS Code with the Databricks extension. Refer to the [VS Code Databricks extension guide](https://docs.databricks.com/aws/en/dev-tools/vscode-ext/)
 
 #### 7. Run Unit Tests
-This project uses pytest for unit testing. Run unit tests using Databricks connect or using [unit testing for notebooks](https://docs.databricks.com/aws/en/notebooks/testing)
+This project uses pytest for unit testing. Run unit tests using Databricks connect or using [unit testing for notebooks](https://docs.databricks.com/aws/en/notebooks/testing). You can run pytest locally using following command
+
+```
+python -m pytest
+```
 
 #### 8. Running Databricks Jobs
 
 After successfully running unit tests:
 
 - Execute Databricks jobs in the development environment using Databricks Asset Bundles. [See the documentation](https://docs.databricks.com/aws/en/dev-tools/bundles)
+
+```
+databricks bundle validate
+databricks bundle deploy -t dev
+databricks bundle run -t dev kafka_databricks_job
+```
 
 - Run Databricks Asset Bundles in CI/CD using github action [Run a CI/CD workflow with a Databricks Asset Bundle and GitHub Actions](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/bundles/ci-cd-bundles):<br />
     This project follows the process below:
