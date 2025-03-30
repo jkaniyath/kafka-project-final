@@ -30,7 +30,7 @@ This Python application reads messages from a JSON file line by line and sends t
 ### Pre-requisites
 
 #### 1. Set Up Confluent Cloud Kafka Topics
-You need a Confluent Cloud account and create a cluster along with the following Kafka topics. For detailed instructions on how to create topics in Confluent Cloud, refer to the official documentation: [Create Kafka Topics.](https://docs.confluent.io/platform/current/control-center/topics/create.html)
+You need Git installed, a Confluent Cloud account, and create a cluster along with the following Kafka topics. For detailed instructions on how to create topics in Confluent Cloud, refer to the official documentation: [Create Kafka Topics.](https://docs.confluent.io/platform/current/control-center/topics/create.html)
 - books
 - customers
 - orders
@@ -43,7 +43,7 @@ pip install setuptools
 
 #### 3. Clone the Repository and Install
 You can find the project's GitHub repository at the following link:
-<repository_url>
+[repository_url](https://github.com/jkaniyath/kafka_producer.git)
 
 Clone the project and install the required dependencies using setup.py (all necessary libraries are included in setup.py):
 
@@ -82,3 +82,4 @@ Run main.py --help for more details:
 python main.py --help
 ```
 
+## 2. Databricks Stream
