@@ -5,15 +5,6 @@ To ensure data consistency and historical tracking, the project applies the Slow
 
 The project also includes Databricks job execution using asset bundles, allowing for efficient job deployment and management, and demonstrates how to develop and deploy using a CI/CD pipeline, ensuring seamless integration, testing, and automated deployment of Databricks workflows.
 
-## Pre-requisites
-- Confluent cloud account
-- Azure account
-- Github account
-- VS code
-- Python 3.11
-- Git installed
-- Databricks CLI installed
-
 ## 1. Python Kafka Producer
 ### Overview
 This Python application reads messages from a JSON file line by line and sends them to a Kafka topic hosted on Confluent Cloud. The user specifies the JSON file, target Kafka topic, key column, and the number of messages to send via command-line arguments. All Confluent Kafka secrets are managed securely using the Python **dotenv** library.
