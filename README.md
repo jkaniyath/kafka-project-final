@@ -144,7 +144,7 @@ pip install -e .
 This project is developed using VS Code with the Databricks extension. Refer to the [VS Code Databricks extension guide](https://docs.databricks.com/aws/en/dev-tools/vscode-ext/)
 
 #### 7. Run Unit Tests
-This project uses pytest for unit testing. Run unit tests using Databricks connect.
+This project uses pytest for unit testing. Run unit tests using Databricks connect or using [unit testing for notebooks](https://docs.databricks.com/aws/en/notebooks/testing)
 
 #### 8. Running Databricks Jobs
 
