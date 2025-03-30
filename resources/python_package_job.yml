@@ -1,0 +1,121 @@
+resources:
+  jobs:
+    kafka_databricks_job:
+      name: kafka_databricks_job
+      tasks:
+        - task_key: project_setup 
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/project_setup.py
+            base_parameters:
+              env: ${var.env}
+          libraries:
+            - whl: ../dist/*.whl
+            - maven:
+                coordinates:  org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1
+
+        - task_key: bronze_books_ingestion
+          depends_on:
+            - task_key: project_setup
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/bronze/ingest_to_bronze_books.py
+            base_parameters:
+              env: ${var.env}
+
+        - task_key: bronze_countries_ingestion
+          depends_on:
+            - task_key: project_setup
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/bronze/ingest_to_bronze_countries.py
+            base_parameters:
+              env: ${var.env}
+
+        - task_key: bronze_customers_ingestion
+          depends_on:
+            - task_key: project_setup
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/bronze/ingest_to_bronze_customers.py
+            base_parameters:
+              env: ${var.env}
+
+        - task_key: bronze_orders_ingestion
+          depends_on:
+            - task_key: project_setup
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/bronze/ingest_to_bronze_orders.py
+            base_parameters:
+              env: ${var.env}
+
+        - task_key: silver_books_ingestion
+          depends_on:
+            - task_key: project_setup
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/silver/ingest_to_silver_books.py
+            base_parameters:
+              env: ${var.env}
+
+        - task_key: silver_customers_ingestion
+          depends_on:
+            - task_key: project_setup
+            - task_key: bronze_countries_ingestion
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/silver/ingest_to_silver_customers.py
+            base_parameters:
+              env: ${var.env}
+
+        - task_key: silver_orders_ingestion
+          depends_on:
+            - task_key: project_setup
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/silver/ingest_to_silver_orders.py
+            base_parameters:
+              env: ${var.env}
+
+        - task_key: silver_books_orders_ingestion
+          depends_on:
+            - task_key: project_setup
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/silver/ingest_to_silver_books_orders.py
+            base_parameters:
+              env: ${var.env}
+
+        - task_key: silver_customers_orders_ingestion
+          depends_on:
+            - task_key: project_setup
+            - task_key: bronze_countries_ingestion
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/silver/ingest_to_silver_customers_orders.py
+            base_parameters:
+              env: ${var.env}
+
+        - task_key: gold_authors_stats_ingestion
+          depends_on:
+            - task_key: project_setup
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../src/notebooks/gold/ingest_to_gold_authors_stats.py
+            base_parameters:
+              env: ${var.env}
+
+      job_clusters:
+        - job_cluster_key: job_cluster
+          new_cluster:
+            spark_version: 15.4.x-scala2.12
+            data_security_mode: SINGLE_USER
+            node_type_id: Standard_F4 #Standard_DS3_v2
+            spark_conf: 
+              "spark.databricks.catalog.enabled": "true"
+            autoscale:
+                min_workers: 1
+                max_workers: 2
+
+

@@ -1,0 +1,5 @@
+pytest
+setuptools
+wheel
+databricks-connect==15.1.*
+chispa==0.10.1
