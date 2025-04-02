@@ -1,4 +1,5 @@
 # Kafka-Databricks Stream Project
+![Project Image](./images/project_image.jpg)
 This project implements a data streaming pipeline using Kafka and Databricks, designed to process data efficiently through a medallion architecture (Bronze, Silver, and Gold layers). The pipeline starts with a Python Kafka producer that reads data from a JSON file and sends messages to Confluent Kafka. Databricks streaming loads this data from Kafka topics, storing raw data in the Bronze layer, cleaning and transforming it in the Silver layer, and aggregating it in the Gold layer.
 
 To ensure data consistency and historical tracking, the project applies the Slowly Changing Dimension Type 2 (SCD2) approach to a specific table where historical data needs to be maintained. It also leverages Change Data Capture (CDC) in Delta Lake to read data efficiently. For performance optimization, Delta tables, liquid clustering, and Databricks best practices are implemented to enhance query performance and storage efficiency.
@@ -74,6 +75,7 @@ python main.py --help
 ```
 
 ## 2. Databricks Stream
+![Schema diagram](./images/tables.jpg)
 
 ### Overview
 This Spark Streaming application consumes messages from Confluent Cloud Kafka topics (books, consumers, and orders), stores them in the bronze layer, processes them in the silver layer, and aggregates them in the gold layer.

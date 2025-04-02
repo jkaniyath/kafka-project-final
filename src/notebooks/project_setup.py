@@ -29,7 +29,7 @@ silver_db_location = config.get_silver_external_location()
 gold_db_location = config.get_gold_external_location()
 
 # COMMAND ----------
-bronze_setup = BronzeSetup(spark=spark,  db_name="bronze", bronze_db_location=bronze_db_location,  table_names=["books","orders","customers"], env=env)
+bronze_setup = BronzeSetup(spark=spark,  db_name="bronze", bronze_db_location=bronze_db_location,  table_names=["books_bronze","orders_bronze","customers_bronze"], env=env)
 
 
 # COMMAND ----------
